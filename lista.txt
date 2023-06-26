@@ -1,0 +1,4 @@
+Controller/ReconocimientoController
+Models/ComparacionFacial
+storage/app/entrenamiento/labels.txt
+storage/app/entrenamiento/trained_model.txt
