@@ -20,7 +20,8 @@ class Emergencia extends Model
         'hora',
         'motivo',
         'observacion',
-        'user_id'
+        'user_id',
+        'medico_id'
     ];
 
     protected $dates = [

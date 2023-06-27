@@ -27,6 +27,8 @@ class CreateEmergenciasTable extends Migration
             $table->string('diagnostico')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->on('users')->references('id')->onDelete('cascade');
+            $table->unsignedBigInteger('medico_id');
+            $table->foreign('medico_id')->on('users')->references('id')->onDelete('cascade');
             //ACTUALIZAR MEDICO_ID
             $table->timestamps();
         });
