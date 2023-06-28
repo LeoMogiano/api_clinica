@@ -53,7 +53,7 @@ class EmergenciaController extends Controller
     public function createEmergencia(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'detalle_fin' => 'nullable|string',
+            
             'diagnostico' => 'nullable|string',
             'estado' => 'required|string',
             'fecha' => 'required|date',
@@ -77,7 +77,7 @@ class EmergenciaController extends Controller
         }
 
         $emergencia = new Emergencia();
-        $emergencia->detalle_fin = $request->input('detalle_fin');
+        
         $emergencia->diagnostico = $request->input('diagnostico');
         $emergencia->estado = $request->input('estado');
         $emergencia->fecha = $request->input('fecha');
@@ -100,7 +100,7 @@ class EmergenciaController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            'detalle_fin' => 'nullable|string',
+            
             'diagnostico' => 'nullable|string',
             'estado' => 'nullable|string',
             'fecha' => 'nullable|date',
@@ -116,9 +116,7 @@ class EmergenciaController extends Controller
             'exists' => 'El campo :attribute no existe en la tabla de usuarios.',
         ]);
 
-        if ($request->filled('detalle_fin')) {
-            $emergencia->detalle_fin = $request->input('detalle_fin');
-        }
+   
 
         if ($request->filled('diagnostico')) {
             $emergencia->diagnostico = $request->input('diagnostico');

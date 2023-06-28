@@ -12,7 +12,6 @@ class Emergencia extends Model
     protected $table ='emergencias';
 
     protected $fillable = [
-        'detalle_fin',
         'diagnostico',
         'estado',
         'fecha',

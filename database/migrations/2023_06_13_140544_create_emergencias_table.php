@@ -23,7 +23,7 @@ class CreateEmergenciasTable extends Migration
             $table->date('fecha');
             $table->time('hora');
             //final
-            $table->string('detalle_fin')->nullable();
+            /* $table->string('detalle_fin')->nullable(); */
             $table->string('diagnostico')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->on('users')->references('id')->onDelete('cascade');

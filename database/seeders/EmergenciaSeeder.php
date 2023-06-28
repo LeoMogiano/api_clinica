@@ -16,8 +16,7 @@ class EmergenciaSeeder extends Seeder
     {
         $emergencias = [
             [
-                'detalle_fin' => null,
-                'diagnostico' => 'Neumonía',
+                'diagnostico' => null,
                 'estado' => 'En atención',
                 'fecha' => '2023-06-13',
                 'gravedad' => 'Alta',
@@ -28,8 +27,7 @@ class EmergenciaSeeder extends Seeder
                 'medico_id' => 1
             ],
             [
-                'detalle_fin' => null,
-                'diagnostico' => 'Fractura de tibia y peroné',
+                'diagnostico' => null,
                 'estado' => 'En atención',
                 'fecha' => '2023-06-13',
                 'gravedad' => 'Media',
@@ -40,8 +38,7 @@ class EmergenciaSeeder extends Seeder
                 'medico_id' => 2
             ],
             [
-                'detalle_fin' => 'Se le diagnosticó con gastroenteritis aguda y se le brindó tratamiento con líquidos intravenosos y medicamentos para controlar los síntomas. Tras una mejoría significativa, se le dio de alta con instrucciones de cuidado en el hogar.',
-                'diagnostico' => 'Gastroenteritis aguda',
+                'diagnostico' => 'Se le diagnosticó con gastroenteritis aguda y se le brindó tratamiento con líquidos intravenosos y medicamentos para controlar los síntomas. Tras una mejoría significativa, se le dio de alta con instrucciones de cuidado en el hogar.',
                 'estado' => 'Finalizada',
                 'fecha' => '2023-06-13',
                 'gravedad' => 'Baja',
