@@ -62,6 +62,7 @@ class EmergenciaController extends Controller
             'motivo' => 'nullable|string',
             'observacion' => 'nullable|string',
             'user_id' => 'required|exists:users,id',
+            'medico_id' => 'nullable|exists:users,id',
         ]);
 
         $validator->setCustomMessages([
@@ -86,6 +87,7 @@ class EmergenciaController extends Controller
         $emergencia->motivo = $request->input('motivo');
         $emergencia->observacion = $request->input('observacion');
         $emergencia->user_id = $request->input('user_id');
+        $emergencia->medico_id = $request->input('medico_id');
         $emergencia->save();
 
         return response()->json(['message' => 'Emergencia creada exitosamente'], 201);
@@ -109,6 +111,7 @@ class EmergenciaController extends Controller
             'motivo' => 'nullable|string',
             'observacion' => 'nullable|string',
             'user_id' => 'nullable|exists:users,id',
+            'medico_id' => 'nullable|exists:users,id',
         ]);
 
         $validator->setCustomMessages([
@@ -148,6 +151,10 @@ class EmergenciaController extends Controller
 
         if ($request->filled('user_id')) {
             $emergencia->user_id = $request->input('user_id');
+        }
+
+        if ($request->filled('medico_id')) {
+            $emergencia->medico_id = $request->input('medico_id');
         }
 
         $emergencia->save();
