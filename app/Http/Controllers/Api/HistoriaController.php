@@ -8,7 +8,18 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class HistoriaController extends Controller
-{
+{   
+    public function getHistorias()
+    {
+        $historias = HistoriaMedica::all();
+
+        if (!$historias) {
+            return response()->json([], 204);
+        }
+
+        return response()->json(['historias' => $historias], 200);
+    }
+
     public function getHistoriaByPaciente($userId)
     {
         $historia = HistoriaMedica::where('user_id', $userId)->first();

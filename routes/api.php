@@ -50,6 +50,7 @@ Route::delete('/delete_analisis', [AnalisisController::class, 'deleteAnalisis'])
 
 
 //HistoriaMedicaController
+Route::get('/historias', [HistoriaController::class, 'getHistorias']);
 Route::get('/historia/user/{id}', [HistoriaController::class, 'getHistoriaByPaciente']);
 Route::post('/create_historia', [HistoriaController::class, 'createHistoria']);
 Route::put('/update_historia', [HistoriaController::class, 'updateHistoria']);
