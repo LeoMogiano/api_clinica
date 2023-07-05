@@ -34,7 +34,7 @@ Route::get('/user/{id}', [UserController::class, 'getUserById']);
 Route::post('/create_user', [UserController::class, 'createUser']);
 Route::put('/update_user/{id}', [UserController::class, 'updateUser']);
 Route::delete('/delete_user/{id}', [UserController::class, 'deleteUser']);
-Route::post('/identify_user/{id}', [UserController::class, 'identifyUser']);
+Route::post('/identify_user', [UserController::class, 'identifyUser']);
 
 //EmergenciaController
 Route::get('/emergencias', [EmergenciaController::class, 'getEmergencias']);
