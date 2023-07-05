@@ -237,54 +237,54 @@ class UserController extends Controller
         return response()->json(['message' => 'Usuario eliminado exitosamente'], 200);
     }
 
-    public function indentifyUser($id)
+    public function identifyUser(Request $request)
     {
-
-        $users = User::all();
-
-        $userActual = User::find($id);
-
-        foreach ($users as $user) {
-
-            if ($user->foto and $user->group == 'Pacientes' and $user->role == 'Asegurado') {
-
-                $image1 = substr($user->foto, 41, strlen($user->foto));
-
-                $image2 = substr($userActual->foto, 41, strlen($userActual->foto));
-
-                $client = new RekognitionClient([
-                    'region' => 'us-east-1',
-                    'version' => 'latest',
-                ]);
-                $results = $client->compareFaces([
-                    'SimilarityThreshold' => 80,
-                    'SourceImage' => [
-                        'S3Object' => [
-                            'Bucket' => 'mogi-aws-bucket',
-                            'Name' => $image1
+        $users = User::where('group', 'Pacientes')->get();
+    
+        if ($request->hasFile('foto')) {
+            $imageFile = $request->file('foto');
+            $extension = $imageFile->getClientOriginalExtension();
+            $fileName = uniqid() . '.' . $extension;
+            $directory = 'reconocimientos';
+            Storage::disk('s3')->putFileAs($directory, $imageFile, $fileName, 'public');
+            $imageUrl = Storage::disk('s3')->url($directory . '/' . $fileName);
+    
+            foreach ($users as $user) {
+                if ($user->foto) {
+                    $image1 = substr($imageUrl, 41, strlen($imageUrl));
+                    $image2 = substr($user->foto, 41, strlen($user->foto));
+    
+                    $client = new RekognitionClient([
+                        'region' => 'us-east-1',
+                        'version' => 'latest',
+                    ]);
+    
+                    $results = $client->compareFaces([
+                        'SimilarityThreshold' => 80,
+                        'SourceImage' => [
+                            'S3Object' => [
+                                'Bucket' => 'mogi-aws-bucket',
+                                'Name' => $image1,
+                            ],
                         ],
-                    ],
-                    'TargetImage' => [
-                        'S3Object' => [
-                            'Bucket' => 'mogi-aws-bucket',
-                            'Name' => $image2
+                        'TargetImage' => [
+                            'S3Object' => [
+                                'Bucket' => 'mogi-aws-bucket',
+                                'Name' => $image2,
+                            ],
                         ],
-                    ],
-                ]);
-
-                $resultLabels = $results->get('FaceMatches');
-
-                if (!empty($resultLabels)) {
-
-                    return response()->json(['user' => $user], 200);
-
-                } else {
-
-                    if (empty($resultLabels)) {
-                        return response()->json([], 204);
+                    ]);
+    
+                    $resultLabels = $results->get('FaceMatches');
+    
+                    if (!empty($resultLabels)) {
+                        return response()->json(['user' => $user], 200);
                     }
                 }
             }
         }
+    
+        return response()->json([], 204);
     }
+
 }
