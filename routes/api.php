@@ -46,7 +46,7 @@ Route::delete('/delete_emergencia/{id}', [EmergenciaController::class, 'deleteEm
 //AnalisisController
 Route::get('/analisis/emergencia/{id}', [AnalisisController::class, 'getAnalisisByEmergencia']);
 Route::post('/create_analisis', [AnalisisController::class, 'createAnalisis']);
-Route::delete('/delete_analisis', [AnalisisController::class, 'deleteAnalisis']);
+Route::delete('/delete_analisis/{id}', [AnalisisController::class, 'deleteAnalisis']);
 
 
 //HistoriaMedicaController
